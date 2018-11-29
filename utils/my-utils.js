@@ -55,7 +55,7 @@ export let EventUtil = {
      * @param eventName：要解绑的事件，名
      * @param handler：事件处理函数
      */
-    removeHandler: function(ele, eventName, handler) {
+    removeHandler: function (ele, eventName, handler) {
         if (ele.removeEventListener) {
             ele.removeEventListener(eventName, handler);
         } else if (ele.detachEvent) {
@@ -69,7 +69,7 @@ export let EventUtil = {
      * @param event 事件处理函数的e参数（事件对象）
      * @returns {*|Event | undefined} 返回的兼容的事件对象
      */
-    getEvent: function(event) {
+    getEvent: function (event) {
         return event || window.event;
     },
     /**
@@ -77,14 +77,14 @@ export let EventUtil = {
      * @param event：事件处理函数的e参数（事件对象）
      * @returns {*|Object|Element}：返回的兼容的目标元素
      */
-    getTarget: function(event) {
+    getTarget: function (event) {
         return event.target || event.srcElement;
     },
     /**
      * 防止默认事件
      * @param event
      */
-    preventDefault: function(event) {
+    preventDefault: function (event) {
         if (event.preventDefault) {
             event.preventDefault();
         } else {
@@ -95,7 +95,7 @@ export let EventUtil = {
      * 防止事件冒泡
      * @param event
      */
-    stopPropagation: function(event) {
+    stopPropagation: function (event) {
         if (event.stopPropagation) {
             event.stopPropagation();
         } else {
@@ -109,8 +109,8 @@ export let EventUtil = {
      * @param selector:选择器，可以是className或者tagName
      * @param handler：事件的执行函数
      */
-    entrust_on: function(parentEle, eventName, selector, handler) {
-        let a = function(ev) {
+    entrust_on: function (parentEle, eventName, selector, handler) {
+        let a = function (ev) {
             let event = ev || window.event;
             let target = event.target || event.srcElement;
             if (selector.charAt(0) !== '.' && selector.charAt(0) !== '#') {
@@ -144,13 +144,13 @@ export let EventUtil = {
  * number:cookie保存时间
  */
 export let Cookie = {
-    setCookie: function(name, value, iDay) {
+    setCookie: function (name, value, iDay) {
         let oDate = new Date();
         oDate.setDate(oDate.getDate() + iDay);
         document.cookie = name + '=' + value + ';expires=' + oDate;
     },
     //获取cookie
-    getCookie: function(name) {
+    getCookie: function (name) {
         let arr = document.cookie.split('; ');
         for (let i = 0; i < arr.length; i++) {
             let arr2 = arr[i].split('=');
@@ -161,7 +161,7 @@ export let Cookie = {
         return '';
     },
     //删除cookie
-    removeCookie: function(name) {
+    removeCookie: function (name) {
         this.setCookie(name, 1, -1);
     }
 };
@@ -194,8 +194,8 @@ export function newSort(arr, sortMethods) {
 export function countUp(deadLine) {
     for (let i = 0; i <= deadLine; i++) {
         setTimeout(
-            (function(num) {
-                return function() {
+            (function (num) {
+                return function () {
                     console.log(num);
                 };
             })(i),
@@ -210,11 +210,14 @@ export function countUp(deadLine) {
  */
 export function countDown(deadLine) {
     for (let i = 0; i <= deadLine; i++) {
-        (i => {
-            setTimeout(function() {
+        (i = > {
+            setTimeout(function () {
                 console.log(i);
-            }, i * 1000);
-        })(i);
+            }, i * 1000
+    )
+        ;
+    })
+        (i);
     }
 }
 
@@ -288,7 +291,7 @@ export function mobileRemSizingByWangYi(rate) {
 export function decoration(dom, type, fn) {
     let originalEvent = dom[type];
     if (typeof dom[type] === 'function') {
-        dom[type] = function() {
+        dom[type] = function () {
             originalEvent();
             fn();
         };
@@ -308,7 +311,7 @@ export function decoration(dom, type, fn) {
  * @returns {string | * | void}
  */
 export function formateStrin(str, data) {
-    return str.replace(/\{#(\w+)#\}/g, function(match, key) {
+    return str.replace(/\{#(\w+)#\}/g, function (match, key) {
         return typeof data[key] === 'undefined' ? '' : data[key];
     });
 }
@@ -348,7 +351,7 @@ export function toArray(html_collection) {
  */
 export function menoize(fn, cache) {
     let menonize_cache = cache || {};
-    return function(arr) {
+    return function (arr) {
         if (!menonize_cache[arr]) {
             menonize_cache[arr] = fn(arr);
         }
@@ -362,7 +365,7 @@ export function multiStep(steps, args, callback) {
     // args：处理函数的参数
     // callback：执行完的回调
     let tasks = steps.concat();
-    setTimeout(function() {
+    setTimeout(function () {
         let task = tasks.shift();
         task.apply(null, args);
         if (tasks.length > 0) {
@@ -413,7 +416,7 @@ export function removeRepetition(arr) {
  * @returns {Promise<any>}:返回一个promise
  */
 export function injectScriptToHeadPromise(src) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         let headEl = document.getElementsByTagName('head')[0];
         let scriptEl = document.createElement('script');
         scriptEl.src = src;
@@ -429,7 +432,7 @@ export function injectScriptToHeadPromise(src) {
  * @returns {Promise<any>}:返回一个promise
  */
 export function injectScriptToBodyPromise(src) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         let headEl = document.getElementsByTagName('body')[0];
         let scriptEl = document.createElement('script');
         scriptEl.src = src;
