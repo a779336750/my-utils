@@ -3,7 +3,6 @@
  * @param ele:要获取相对浏览器上部高度的dom元素
  * @returns {number}：元素相对浏览器上部高度
  */
-
 export function getClientTop(ele) {
     let top = 0;
     while (ele !== null) {
@@ -210,14 +209,11 @@ export function countUp(deadLine) {
  */
 export function countDown(deadLine) {
     for (let i = 0; i <= deadLine; i++) {
-        (i = > {
+        (function (i) {
             setTimeout(function () {
                 console.log(i);
-            }, i * 1000
-    )
-        ;
-    })
-        (i);
+            }, i * 1000);
+        })(i);
     }
 }
 
@@ -444,3 +440,4 @@ export function injectScriptToBodyPromise(src) {
      * 在html的body标签末尾处插入script
      */
 }
+

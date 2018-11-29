@@ -1,5 +1,5 @@
-let count = 0;
-export default jsonp = (link, option) => {
+export default function (link, option) {
+    window.count = 0;
     let id = count++;
     let url = link;
     if (option) {
